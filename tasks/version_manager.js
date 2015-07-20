@@ -1,8 +1,8 @@
 /*
  * grunt-version-manager
- * https://github.com/jln/grunt-version-manager
+ * https://github.com/jln-pl/grunt-version-manager
  *
- * Copyright (c) 2015 JLN
+ * Copyright (c) 2015 Jerzy Jelinek
  * Licensed under the MIT license.
  */
 
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
       
       markIfSnapshot(branch, options.branch, metadata);
 
-      grunt.log.writeln(JSON.stringify(metadata));
+      grunt.log.writeln(JSON.stringify(grunt.file.readJSON('package.json')));
       done();
     });
   });

@@ -28,7 +28,6 @@ exports.version_manager = {
     done();
   },
   default_options: function(test) {
-    console.log(test);
     test.expect(1);
 
     var actual = grunt.file.read('tmp/default_options');

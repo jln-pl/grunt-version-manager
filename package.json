@@ -2,22 +2,22 @@
   "name": "grunt-version-manager",
   "description": "Plugin for managing applications version, based on git branch.",
   "version": "0.1.0",
-  "homepage": "https://github.com/jln/grunt-version-manager",
+  "homepage": "https://github.com/jln-pl/grunt-version-manager",
   "author": {
-    "name": "JLN",
+    "name": "Jerzy Jelinek",
     "email": "jerzy.jelinek@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/jln/grunt-version-manager.git"
+    "url": "git://github.com/jln-pl/grunt-version-manager.git"
   },
   "bugs": {
-    "url": "https://github.com/jln/grunt-version-manager/issues"
+    "url": "https://github.com/jln-pl/grunt-version-manager/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/jln/grunt-version-manager/blob/master/LICENSE-MIT"
+      "url": "https://github.com/jln-pl/grunt-version-manager/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
