@@ -1,4 +1,4 @@
-# grunt-version-manager
+# grunt-version-manager - still in progress!!!
 
 > Plugin for managing applicarsion, based on git branch.
 
