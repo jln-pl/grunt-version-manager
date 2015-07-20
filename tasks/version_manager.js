@@ -38,7 +38,7 @@ module.exports = function (grunt) {
       
       markIfSnapshot(branch, options.branch, metadata);
 
-      grunt.log.writeln(JSON.stringify(grunt.file.readJSON('package.json')));
+      grunt.log.writeln(JSON.stringify(metadata));
       done();
     });
   });
