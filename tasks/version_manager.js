@@ -10,16 +10,36 @@
 
 var git = require('git-rev');
 
-module.exports = function(grunt) {
-  grunt.registerTask('version_manager', 'Plugin for managing applications version, based on git branch.', function() {
-    var options = this.options();
-    var done = this.async();
+module.exports = function (grunt) {
+  function copyOptions(options) {
+    var results = {};
 
-    git.branch(function (str) {
-      grunt.log.writeln(str);
+    for (var option in options) {
+      if (option !== 'branch' && options.hasOwnProperty(option)) {
+        results[option] = options[option];    
+      }
+    }
+
+    return results;
+  }
+
+  function markIfSnapshot(gitBranch, optionsBranch, metadata) {
+      if (gitBranch !== optionsBranch) {
+        metadata.version += "-SNAPSHOT"
+      }
+  }
+
+  grunt.registerTask('version_manager', 'Plugin for managing applications version, based on git branch.', function() {
+    var options = this.options(),
+        done = this.async();
+
+    git.branch(function (branch) {
+      var metadata = copyOptions(options);
+      
+      markIfSnapshot(branch, options.branch, metadata);
+
+      grunt.log.writeln(JSON.stringify(metadata));
       done();
     });
-
-    grunt.log.writeln(options.version);
   });
 };
