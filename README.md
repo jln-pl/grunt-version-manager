@@ -2,7 +2,7 @@
 
 > Plugin for managing applications version (release, snapshot), based on git branch.
 
-This plugin adds "-SNAPSHOT" suffix to given 'version'* if it is called from any other branch then 'release branch'*.
+This plugin adds "-SNAPSHOT" suffix to given 'version'* if it is called from any other branch than 'release branch'*.
 
 *version and release branch should be defined in plugin options
 
