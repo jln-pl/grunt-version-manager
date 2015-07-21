@@ -1,6 +1,6 @@
-# grunt-version-manager - still in progress!!!
+# grunt-version-manager
 
-> Plugin for managing applicarsion, based on git branch.
+> Plugin for managing applications version (release, snapshot), based on git branch.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -27,57 +27,54 @@ grunt.initConfig({
   version_manager: {
     options: {
       // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    }
   },
 });
 ```
 
 ### Options
 
-#### options.separator
+Only two options are required - 'branch' and 'version'. You can add any other string options. They will be displayed with 'version' on the stdout.
+
+#### options.branch
 Type: `String`
-Default value: `',  '`
+Default value: `master`
 
-A string value that is used to do something with whatever.
+A string value that describes release branch.
 
-#### options.punctuation
+#### options.version
 Type: `String`
-Default value: `'.'`
+Default value: `version from package.json`
 
-A string value that is used to do something else with whatever else.
+A string value that describes version of your project.
 
 ### Usage Examples
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+#### Simple config
 
 ```js
 grunt.initConfig({
+  pkg: grunt.file.readJSON('package.json'),
   version_manager: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    options: {
+      branch: 'master',
+      version: '<%= pkg.version %>'
+    }
   },
 });
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
+#### Config with custom options
 ```js
 grunt.initConfig({
+  pkg: grunt.file.readJSON('package.json'),
   version_manager: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+      branch: 'master',
+      version: '<%= pkg.version %>',
+      desc: 'some description',
+      author: 'some author'
+    }
   },
 });
 ```
