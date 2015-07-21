@@ -11,35 +11,35 @@
 var git = require('git-rev');
 
 module.exports = function (grunt) {
-  function copyOptions(options) {
-    var results = {};
+    function copyOptions(options) {
+        var results = {};
 
-    for (var option in options) {
-      if (option !== 'branch' && options.hasOwnProperty(option)) {
-        results[option] = options[option];    
-      }
+        for (var option in options) {
+            if (option !== 'branch' && options.hasOwnProperty(option)) {
+                results[option] = options[option];
+            }
+        }
+
+        return results;
     }
 
-    return results;
-  }
+    function markIfSnapshot(gitBranch, optionsBranch, metadata) {
+        if (gitBranch !== optionsBranch) {
+            metadata.version += "-SNAPSHOT";
+        }
+    }
 
-  function markIfSnapshot(gitBranch, optionsBranch, metadata) {
-      if (gitBranch !== optionsBranch) {
-        metadata.version += "-SNAPSHOT"
-      }
-  }
-
-  grunt.registerTask('version_manager', 'Plugin for managing applications version, based on git branch.', function() {
-    var options = this.options(),
+    grunt.registerTask('version_manager', 'Plugin for managing applications version, based on git branch.', function () {
+        var options = this.options(),
         done = this.async();
 
-    git.branch(function (branch) {
-      var metadata = copyOptions(options);
-      
-      markIfSnapshot(branch, options.branch, metadata);
+        git.branch(function (branch) {
+            var metadata = copyOptions(options);
 
-      grunt.log.writeln(JSON.stringify(metadata));
-      done();
+            markIfSnapshot(branch, options.branch, metadata);
+
+            grunt.log.writeln(JSON.stringify(metadata));
+            done();
+        });
     });
-  });
 };

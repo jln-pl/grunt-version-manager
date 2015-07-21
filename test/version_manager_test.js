@@ -1,39 +1,48 @@
 'use strict';
 
-var grunt = require('grunt');
+var grunt = require('grunt'),
+cp = require('child_process');
 
-/*
-  ======== A Handy Little Nodeunit Reference ========
-    
+function callGrunt(filename, callback) {
+    var command = '../node_modules/.bin/grunt --gruntfile ' + filename + ' version_manager',
+    options = {cwd: 'test/'};
 
-  Test methods:
-    test.expect(numAssertions)
-    test.done()
-  Test assertions:
-    test.ok(value, [message])
-    test.equal(actual, expected, [message])
-    test.notEqual(actual, expected, [message])
-    test.deepEqual(actual, expected, [message])
-    test.notDeepEqual(actual, expected, [message])
-    test.strictEqual(actual, expected, [message])
-    test.notStrictEqual(actual, expected, [message])
-    test.throws(block, [error], [message])
-    test.doesNotThrow(block, [error], [message])
-    test.ifError(value)
-*/
+    cp.exec(command, options, callback);
+}
+
+function getJsonFromOutput(output) {
+    var start = output.indexOf('{'),
+    end = output.indexOf('}') - start + 1;
+
+    return output.substr(start, end);
+}
 
 exports.version_manager = {
-  setUp: function(done) {
-    // setup here if necessary
-    done();
-  },
-  default_options: function(test) {
-    test.expect(1);
+    pass: function (test) {
+        var actual, expected;
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+        test.expect(1);
 
-    test.done();
-  }
+        callGrunt('gruntfile-pass.js', function (error, stdout) {
+            expected = '{"version":"0.1.0"}';
+
+            actual = getJsonFromOutput(stdout);
+
+            test.equal(actual, expected, 'should return given options unchanged');
+            test.done();
+        });
+    },
+
+    failed: function (test) {
+        var actual, expected;
+
+        callGrunt('gruntfile-fail.js', function (error, stdout) {
+            expected = '{"version":"0.1.0-SNAPSHOT"}';
+
+            actual = getJsonFromOutput(stdout);
+
+            test.equal(actual, expected, 'should return given options with snapshot version');
+            test.done();
+        });
+    }
 };
