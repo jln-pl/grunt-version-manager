@@ -2,6 +2,10 @@
 
 > Plugin for managing applications version (release, snapshot), based on git branch.
 
+This plugin adds "-SNAPSHOT" suffix to given 'version'* if it is called from any other branch then 'release branch'*.
+
+*version and release branch should be defined in plugin options
+
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
 
@@ -44,7 +48,7 @@ A string value that describes release branch.
 
 #### options.version
 Type: `String`
-Default value: `version from package.json`
+Default value: `0.0.0`
 
 A string value that describes version of your project.
 

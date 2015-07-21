@@ -30,7 +30,10 @@ module.exports = function (grunt) {
     }
 
     grunt.registerTask('version_manager', 'Plugin for managing applications version, based on git branch.', function () {
-        var options = this.options(),
+        var options = this.options({
+            branch: 'master',
+            version: '0.0.0'
+        }),
         done = this.async();
 
         git.branch(function (branch) {
