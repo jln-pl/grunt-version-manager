@@ -32,7 +32,7 @@ grunt.initConfig({
     options: {
       // Task-specific options go here.
     }
-  },
+  }
 });
 ```
 
@@ -64,7 +64,7 @@ grunt.initConfig({
       branch: 'master',
       version: '<%= pkg.version %>'
     }
-  },
+  }
 });
 ```
 
@@ -79,7 +79,7 @@ grunt.initConfig({
       desc: 'some description',
       author: 'some author'
     }
-  },
+  }
 });
 ```
 
